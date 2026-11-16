@@ -21,16 +21,9 @@
 
 <style>
 :root{
---nav:#1E1A19;
---hero:#065143;
---bg:#FFEECF;
---card:#FFEECF;
---cta:#417D96;
---active:#065143;
---footer:#1E1A19;
---text:#1E1A19;
---border:#5F7367;
---mute:#5F7367
+--nav:#1E1A19;--hero:#065143;--bg:#FFEECF;--card:#FFEECF;
+--cta:#417D96;--active:#065143;--footer:#1E1A19;
+--text:#1E1A19;--border:#5F7367;--mute:#5F7367
 }
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:Montserrat,system-ui,sans-serif;font-size:14px;background:var(--bg);color:var(--text);overscroll-behavior:none}
@@ -114,14 +107,20 @@ small,.sm{font-size:11px;color:var(--mute);font-weight:500}
 
 <script>
 /* STARONE — Supabase connected app */
-const SB_URL = window.STARONE_SUPABASE_URL;
-const SB_KEY = window.STARONE_SUPABASE_PUBLISHABLE_KEY;
+const SB_URL=window.STARONE_SUPABASE_URL;
+const SB_KEY=window.STARONE_SUPABASE_PUBLISHABLE_KEY;
 
-if (!SB_URL || !SB_KEY || SB_KEY === 'YAHAN_APNI_PUBLISHABLE_KEY_PASTE_KARO') {
+if(!SB_URL||!SB_KEY){
  console.error('STARONE Supabase configuration is missing.');
 }
 
-const db = window.supabase.createClient(SB_URL, SB_KEY);
+const db=window.supabase.createClient(SB_URL,SB_KEY,{
+ auth:{
+  persistSession:true,
+  autoRefreshToken:true,
+  detectSessionInUrl:true
+ }
+});
 
 var $=function(i){return document.getElementById(i)},app=$('app'),
 cur='intro',st=[],U={n:'',e:'',m:''},sel=[],li=0,ser='A',T=299,tid=null,
@@ -133,7 +132,7 @@ menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
 bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>',
 home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
 ticket:'<path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/>',
-trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4M12 13v4M8 20h8"/>',
+trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 0-4 4M12 13v4M8 20h8"/>',
 user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
 login:'<path d="M14 8l4 4-4 4M18 12H4M14 4v4M14 16v4"/>',
 back:'<path d="M19 12H5M12 19l-7-7 7-7"/>',
@@ -217,6 +216,10 @@ login:function(){
  return{h:'back',b:'<h1 class="h1" style="margin-top:8px;letter-spacing:2px">LOGIN</h1><p class="sub">Login with your registered email and password</p><input class="in" id="le" type="email" autocomplete="email" placeholder="Email Address"><input class="in" id="lp" type="password" autocomplete="current-password" placeholder="Password"><p class="er" id="er"></p><button class="btn" onclick="loginGo()">Login '+ic('login')+'</button><button class="lnk" onclick="forgotPassword()">Forgot Password?</button>'}
 },
 
+reset:function(){
+ return{h:'back',b:'<h1 class="h1" style="margin-top:8px">Reset Password</h1><p class="sub">Create your new password</p><input class="in" id="np1" type="password" autocomplete="new-password" placeholder="Enter New Password"><input class="in" id="np2" type="password" autocomplete="new-password" placeholder="Confirm New Password"><p class="er" id="er"></p><button class="btn" onclick="saveNewPassword()">Update Password</button>'}
+},
+
 home:function(){
  var cards=L.slice(0,2).map(function(_,i){return lcard(i)}).join('');
  return{h:'menu',n:0,b:'<h1 class="h1" style="text-align:left;font-size:22px;font-weight:600;margin-bottom:14px">Live Contest</h1>'+(cards||'<div class="card cd"><b>No live contests yet</b><p class="sub" style="text-align:left">Contest data will appear here when added.</p></div>')}
@@ -291,7 +294,6 @@ function goBack(){
  return false;
 }
 
-/* FIXED: overlay now follows drawer state correctly */
 function dr(o){
  $('dr').classList.toggle('on',!!o);
  $('dim').classList.toggle('on',!!o);
@@ -317,7 +319,7 @@ function toast(m){
  d.className='toast';
  d.textContent=m;
  document.body.appendChild(d);
- setTimeout(function(){d.remove()},2200);
+ setTimeout(function(){d.remove()},3000);
 }
 
 function er(m){
@@ -342,15 +344,8 @@ async function loadLotteries(){
  if(r.error){console.error(r.error);return}
  L=(r.data||[]).map(function(x){
   return{
-   id:x.id,
-   name:x.name,
-   pre:x.prefix,
-   price:Number(x.ticket_price),
-   draw_date:x.draw_date,
-   status:x.status,
-   total:0,
-   avail:0,
-   pool:''
+   id:x.id,name:x.name,pre:x.prefix,price:Number(x.ticket_price),
+   draw_date:x.draw_date,status:x.status,total:0,avail:0,pool:''
   }
  });
 }
@@ -361,11 +356,8 @@ async function loadTickets(){
  if(r.error){console.error(r.error);return}
  mine=(r.data||[]).map(function(x){
   return{
-   id:x.id,
-   lottery_name:x.lotteries?.name||'Lottery',
-   ticket_number:x.ticket_number,
-   price:x.price,
-   status:x.status,
+   id:x.id,lottery_name:x.lotteries?.name||'Lottery',
+   ticket_number:x.ticket_number,price:x.price,status:x.status,
    purchased_at:x.purchased_at
   }
  });
@@ -408,12 +400,13 @@ async function registerUser(){
  if(p1!==p2)return er('Passwords do not match');
 
  authBusy=true;
-
  try{
   var r=await db.auth.signUp({
-   email:e,
-   password:p1,
-   options:{data:{full_name:n,mobile:'+91 '+m}}
+   email:e,password:p1,
+   options:{
+    data:{full_name:n,mobile:'+91 '+m},
+    emailRedirectTo:location.origin+location.pathname
+   }
   });
 
   if(r.error)throw r.error;
@@ -424,13 +417,10 @@ async function registerUser(){
   if(r.data.session){
    session=r.data.session;
    await loadData();
-   st=[];
-   cur='home';
-   R();
+   st=[];cur='home';R();
   }else{
    go('ver');
   }
-
  }catch(x){
   console.error(x);
   er(x.message||'Registration failed');
@@ -441,7 +431,10 @@ async function registerUser(){
 
 async function resendVerification(){
  if(!U.e)return;
- var r=await db.auth.resend({type:'signup',email:U.e});
+ var r=await db.auth.resend({
+  type:'signup',email:U.e,
+  options:{emailRedirectTo:location.origin+location.pathname}
+ });
  if(r.error)return er(r.error.message);
  toast('Verification email sent again');
 }
@@ -456,18 +449,13 @@ async function loginGo(){
  if(!p)return er('Enter your password');
 
  authBusy=true;
-
  try{
   var r=await db.auth.signInWithPassword({email:e,password:p});
   if(r.error)throw r.error;
 
   session=r.data.session;
   await loadData();
-
-  st=[];
-  cur='home';
-  R();
-
+  st=[];cur='home';R();
  }catch(x){
   console.error(x);
   er(x.message||'Login failed');
@@ -476,36 +464,71 @@ async function loginGo(){
  }
 }
 
+/* PASSWORD RESET EMAIL */
 async function forgotPassword(){
  var e=prompt('Enter your registered email address:');
  if(!e)return;
 
- var r=await db.auth.resetPasswordForEmail(
-  e.trim().toLowerCase(),
-  {redirectTo:location.href.split('#')[0]}
- );
+ e=e.trim().toLowerCase();
 
- if(r.error)return toast(r.error.message);
- toast('Password reset email sent');
+ if(!/^\S+@\S+\.\S+$/.test(e)){
+  toast('Please enter a valid email address');
+  return;
+ }
+
+ var redirectURL=location.origin+location.pathname+'?reset=1';
+
+ var r=await db.auth.resetPasswordForEmail(e,{
+  redirectTo:redirectURL
+ });
+
+ if(r.error){
+  toast(r.error.message);
+  return;
+ }
+
+ toast('Password reset email sent. Check your inbox.');
+}
+
+/* SAVE NEW PASSWORD */
+async function saveNewPassword(){
+ if(authBusy)return;
+
+ var p1=$('np1').value;
+ var p2=$('np2').value;
+
+ if(p1.length<6)return er('Password must be at least 6 characters');
+ if(p1!==p2)return er('Passwords do not match');
+
+ authBusy=true;
+ try{
+  var r=await db.auth.updateUser({password:p1});
+  if(r.error)throw r.error;
+
+  toast('Password updated successfully');
+
+  await db.auth.signOut();
+  session=null;
+  st=[];
+  cur='login';
+  R();
+ }catch(x){
+  console.error(x);
+  er(x.message||'Could not update password');
+ }finally{
+  authBusy=false;
+ }
 }
 
 async function logout(){
  await db.auth.signOut();
- session=null;
- U={n:'',e:'',m:''};
- sel=[];
- mine=[];
- st=[];
- cur='welcome';
- R();
+ session=null;U={n:'',e:'',m:''};sel=[];mine=[];st=[];
+ cur='welcome';R();
 }
 
 function openL(i){
  if(!session)return go('login');
- li=i;
- sel=[];
- ser='A';
- go('det');
+ li=i;sel=[];ser='A';go('det');
 }
 
 function draw(){
@@ -547,16 +570,36 @@ async function pay(){
  toast('Payment setup required');
 }
 
+/* AUTH EVENTS INCLUDING PASSWORD RECOVERY */
 db.auth.onAuthStateChange(async function(event,newSession){
+
  session=newSession;
 
- if(newSession){
-  await loadData();
-  if(cur==='intro'||cur==='welcome')cur='home';
+ if(event==='PASSWORD_RECOVERY'){
+  st=[];
+  cur='reset';
   R();
+  return;
+ }
+
+ if(event==='SIGNED_OUT'){
+  if(cur==='reset')return;
+ }
+
+ if(newSession){
+  if(event==='SIGNED_IN'||event==='INITIAL_SESSION'||event==='USER_UPDATED'){
+   await loadData();
+
+   if(cur==='intro'||cur==='welcome'){
+    cur='home';
+   }
+
+   if(cur!=='reset')R();
+  }
  }
 });
 
+/* START APP */
 (async function boot(){
  try{
   var r=await db.auth.getSession();
@@ -564,14 +607,28 @@ db.auth.onAuthStateChange(async function(event,newSession){
 
   if(session){
    await loadData();
-   cur='home';
+   if(cur==='intro'||cur==='welcome')cur='home';
   }
+
+  R();
  }catch(e){
   console.error(e);
+  R();
  }
-
- R();
 })();
+
+/* HANDLE EMAIL RECOVERY LINK */
+if(new URLSearchParams(location.search).get('reset')==='1'){
+ window.addEventListener('load',function(){
+  setTimeout(function(){
+   if(session){
+    st=[];
+    cur='reset';
+    R();
+   }
+  },1200);
+ });
+}
 </script>
 </body>
 </html>
