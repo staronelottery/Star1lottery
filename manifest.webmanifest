@@ -1,0 +1,9 @@
+{
+  "name": "STARONE",
+  "short_name": "STARONE",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFEECF",
+  "theme_color": "#065143",
+  "icons": []
+}

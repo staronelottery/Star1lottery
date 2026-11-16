@@ -1,0 +1,1 @@
+Deploy the contents of this folder to your HTTPS web host. Configure app-config.js with the Supabase project URL and public anon/publishable key. Payment top-ups are intentionally not enabled until a verified server-side payment callback is configured.
