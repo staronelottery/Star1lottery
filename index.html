@@ -5,15 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1E1A19">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="STARONE">
-<meta name="application-name" content="STARONE">
-
-<title>STARONE LOTTERY</title>
+<title>STARONE | Official Website</title>
+<meta name="description" content="Official STARONE application and business information website.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -22,260 +17,261 @@
   --hero:#065143;
   --bg:#FFEECF;
   --cta:#417D96;
-  --active:#065143;
   --text:#1E1A19;
   --mute:#5F7367;
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-  min-height:100vh;
   font-family:Montserrat,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.7;
 }
-
-.page{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
 .header{
-  height:68px;
   background:var(--nav);
   color:var(--bg);
+  padding:17px 6%;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
 }
-
-.logo{
-  text-align:center;
-  line-height:1.15;
-}
-
-.logo b{
-  display:block;
-  font-size:21px;
-  letter-spacing:2px;
-}
-
-.logo span{
-  font-size:9px;
-  letter-spacing:5px;
-}
-
-main{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  padding:24px 20px 30px;
-  text-align:center;
-}
-
+.logo{font-size:23px;font-weight:800;letter-spacing:3px}
+.logo span{display:block;font-size:9px;letter-spacing:5px;text-align:center}
+nav{display:flex;gap:17px;flex-wrap:wrap}
+nav a{color:var(--bg);text-decoration:none;font-size:11px;font-weight:600}
 .hero{
-  width:100%;
-  border-radius:18px;
-  overflow:hidden;
   background:var(--hero);
-}
-
-.hero svg{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-.heading{
-  font-size:25px;
-  line-height:1.45;
-  font-weight:800;
-  margin-top:27px;
-}
-
-.badge{
-  display:inline-block;
-  background:var(--nav);
-  color:var(--bg);
-  padding:12px 30px;
-  border-radius:10px;
-  margin-top:18px;
-}
-
-.badge b{
-  display:block;
-  font-size:22px;
-  letter-spacing:3px;
-}
-
-.badge span{
-  font-size:10px;
-  letter-spacing:6px;
-}
-
-.description{
-  font-size:13px;
-  color:var(--mute);
-  line-height:1.8;
-  margin:22px 5px;
-}
-
-.buttons{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-top:25px;
-}
-
-.btn{
-  min-height:55px;
-  border-radius:30px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:700;
-  transition:.15s;
-}
-
-.download{
-  background:var(--cta);
   color:white;
-  border:1px solid var(--cta);
-}
-
-.contact{
-  background:transparent;
-  color:var(--text);
-  border:1px solid var(--text);
-}
-
-.btn:active{
-  transform:scale(.98);
-  opacity:.85;
-}
-
-.footer{
-  background:var(--nav);
-  color:var(--bg);
+  padding:65px 20px;
   text-align:center;
-  padding:17px 12px;
-  font-size:10px;
-  line-height:1.8;
 }
-
-.footer span{
-  color:#A9B9AC;
+.hero h1{font-size:clamp(35px,7vw,58px);letter-spacing:3px}
+.hero p{max-width:650px;margin:15px auto;color:#e6eee9}
+.hero .notice{
+  max-width:760px;margin:25px auto 0;padding:15px;
+  border:1px solid #a9c0b5;background:#ffffff12;
+  font-size:13px;text-align:left;
 }
-
-@media(min-width:600px){
-  main{
-    padding-top:35px;
-    padding-bottom:40px;
-  }
-
-  .heading{
-    font-size:29px;
-  }
+main{max-width:1050px;margin:auto;padding:0 20px}
+section{padding:55px 0;scroll-margin-top:20px}
+section h2{font-size:27px;color:var(--hero);margin-bottom:15px}
+.intro{color:var(--mute);max-width:750px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;margin-top:25px;
+}
+.card{
+  background:#fff;border:1px solid #e4dfd4;
+  padding:22px;border-radius:8px;
+}
+.card h3{font-size:17px;margin-bottom:9px}
+.card p{font-size:13px;color:var(--mute)}
+.price{font-size:23px;color:var(--hero);font-weight:800;margin:10px 0}
+.status{
+  background:#fff;padding:20px;border-left:4px solid var(--hero);
+  margin-top:20px;font-size:14px;
+}
+ul{padding-left:22px}
+li{margin:7px 0}
+.policy{border-top:1px solid #d8d0c1;padding:20px 0}
+.policy p,.policy li{font-size:13px;color:#55564f}
+.buttons{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:25px auto}
+.btn{
+  min-height:52px;border-radius:30px;display:flex;
+  justify-content:center;align-items:center;text-decoration:none;
+  font-size:13px;font-weight:700;padding:10px 20px;
+}
+.download{background:var(--cta);color:white}
+.contact-btn{border:1px solid var(--text);color:var(--text)}
+.dark{background:var(--nav);color:var(--bg);padding:45px 20px}
+.dark h2{color:var(--bg)}
+.dark a{color:var(--bg)}
+footer{
+  background:#141211;color:var(--bg);
+  text-align:center;padding:20px;font-size:11px;
+}
+footer span{color:#A9B9AC}
+@media(max-width:600px){
+  .header{justify-content:center}
+  nav{justify-content:center}
+  .hero{padding:50px 18px}
+  section{padding:40px 0}
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
-
 <header class="header">
-  <div class="logo">
-    <b>STARONE</b>
-    <span>LOTTERY</span>
-  </div>
+  <div class="logo">STARONE<span>OFFICIAL WEBSITE</span></div>
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#services">SERVICES</a>
+    <a href="#policies">POLICIES</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
 </header>
+
+<div class="hero" id="home">
+  <h1>STARONE</h1>
+  <p>Official information and application download website.</p>
+  <div class="notice">
+    <b>Service Information</b><br>
+    Payment collection and paid token or ticket transactions are not currently enabled.
+    Do not transfer money to anyone claiming to sell STARONE tokens or tickets.
+    Any future paid feature will be activated only after applicable legal and payment-provider approvals.
+  </div>
+</div>
 
 <main>
 
-  <div class="hero">
-    <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
-      <rect width="360" height="220" fill="#065143"/>
-      <circle cx="290" cy="55" r="65" fill="#417D96"/>
-
-      <g fill="#FFEECF">
-        <path d="M55 35l5 12 13 2-10 8 3 13-11-7-11 7 3-13-10-8 13-2z"/>
-        <circle cx="305" cy="175" r="4"/>
-        <circle cx="65" cy="180" r="3"/>
-        <circle cx="145" cy="30" r="3"/>
-        <circle cx="235" cy="190" r="3"/>
-      </g>
-
-      <g transform="rotate(-5 180 110)">
-        <rect x="75" y="67" width="210" height="90" rx="12" fill="#FFEECF"/>
-        <circle cx="75" cy="112" r="10" fill="#065143"/>
-        <circle cx="285" cy="112" r="10" fill="#065143"/>
-
-        <text x="180" y="108"
-          text-anchor="middle"
-          font-family="Montserrat"
-          font-size="23"
-          font-weight="800"
-          fill="#1E1A19">STARONE</text>
-
-        <text x="180" y="130"
-          text-anchor="middle"
-          font-family="Montserrat"
-          font-size="11"
-          letter-spacing="5"
-          fill="#1E1A19">LOTTERY</text>
-      </g>
-    </svg>
-  </div>
-
-  <h1 class="heading">
-    BHARAT KA PEHLA<br>
-    LIVE LOTTERY APP
-  </h1>
-
-  <div class="badge">
-    <b>STARONE</b>
-    <span>LOTTERY</span>
-  </div>
-
-  <p class="description">
-    Download the official STARONE application
-    and access the app directly from your device.
+<section id="about">
+  <h2>About STARONE</h2>
+  <p class="intro">
+    STARONE is a mobile application project operated by P C STUDIO.
+    This website provides information about the application, its proposed
+    features and customer support.
   </p>
-
-  <div class="buttons">
-
-    <a class="btn download"
-       href="./app-release.apk"
-       download="STARONE.apk">
-       DOWNLOAD STARONE APK
-    </a>
-
-    <a class="btn contact"
-       href="https://wa.me/919351883616"
-       target="_blank"
-       rel="noopener">
-       CONTACT ON WHATSAPP
-    </a>
-
+  <div class="grid">
+    <div class="card">
+      <h3>Our Brand</h3>
+      <p>STARONE is our application and digital service brand.</p>
+    </div>
+    <div class="card">
+      <h3>Business Operator</h3>
+      <p>P C STUDIO</p>
+    </div>
+    <div class="card">
+      <h3>Customer Support</h3>
+      <p>Users can contact our support team through email or WhatsApp.</p>
+    </div>
   </div>
+</section>
+
+<section id="services">
+  <h2>Our Application</h2>
+  <p class="intro">
+    STARONE is being developed with user account and in-app features.
+    The following token configuration is a proposed design and is not
+    currently available for purchase or use.
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Proposed Token Package</h3>
+      <div class="price">₹100 = 200 Tokens</div>
+      <p>Proposed configuration only. Payment is currently disabled.</p>
+    </div>
+    <div class="card">
+      <h3>Proposed In-App Feature</h3>
+      <div class="price">200 Tokens = 1 Ticket</div>
+      <p>This feature is inactive and subject to legal and provider review.</p>
+    </div>
+  </div>
+  <p class="intro" style="margin-top:18px;font-size:12px">
+    These details describe a proposed product design, not an active offer
+    to sell tokens or tickets. No cash withdrawal or prize payout is
+    currently offered.
+  </p>
+</section>
+
+<section>
+  <h2>Download Application</h2>
+  <p class="intro">Download the STARONE Android application using the button below.</p>
+  <div class="buttons">
+    <a class="btn download" href="./app-release.apk" download="STARONE.apk">
+      DOWNLOAD STARONE APK
+    </a>
+    <a class="btn contact-btn" href="https://wa.me/919351883616" target="_blank" rel="noopener">
+      CONTACT ON WHATSAPP
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2>Current Service Status</h2>
+  <div class="status">
+    <b>Payments and ticket transactions: Not active</b>
+    <ul>
+      <li>No payment gateway checkout is enabled.</li>
+      <li>No token purchase is currently accepted.</li>
+      <li>No ticket sale or prize payout is currently offered.</li>
+      <li>No cash withdrawal or cash redemption is available.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="policies">
+  <h2>Policies & Information</h2>
+
+  <div class="policy">
+    <h3>Privacy Policy</h3>
+    <p>
+      Information voluntarily provided through customer support, such as
+      name, phone number or email address, may be used to respond to
+      support requests. Users should not share passwords, OTPs or
+      confidential payment credentials through support channels.
+      Information collected by any future app feature, its purpose,
+      retention period and deletion process will be disclosed before
+      that feature is launched.
+    </p>
+    <p>Privacy queries: staronelottery01@gmail.com</p>
+  </div>
+
+  <div class="policy">
+    <h3>Terms & Conditions</h3>
+    <ul>
+      <li>STARONE is operated by P C STUDIO.</li>
+      <li>Users must provide accurate information when using app features.</li>
+      <li>Unauthorized access or misuse of the application is prohibited.</li>
+      <li>Proposed token and ticket features are currently inactive.</li>
+      <li>No cash withdrawal, cash redemption or prize payout is currently offered.</li>
+      <li>Updated terms will be published before any future feature is activated.</li>
+    </ul>
+  </div>
+
+  <div class="policy">
+    <h3>Refund & Cancellation Policy</h3>
+    <p>
+      No token or ticket payments are currently being accepted. Therefore,
+      there is no active purchase or cancellation process. If a paid
+      service is approved and launched in the future, refund eligibility,
+      timelines and cancellation procedures will be published before
+      accepting payments.
+    </p>
+  </div>
+
+  <div class="policy">
+    <h3>Delivery Policy</h3>
+    <p>
+      STARONE is a digital application project. No physical goods are
+      sold or shipped through this website. Any future digital delivery
+      process will be described before the relevant service is activated.
+    </p>
+  </div>
+</section>
 
 </main>
 
-<footer class="footer">
-  <b>STARONE LOTTERY</b><br>
-  <span>Official Application Download Website</span>
-</footer>
+<section class="dark" id="contact">
+  <div style="max-width:1000px;margin:auto">
+    <h2>Contact & Support</h2>
+    <p><b>Brand:</b> STARONE</p>
+    <p><b>Business Operator:</b> P C STUDIO</p>
+    <p><b>Email:</b> <a href="mailto:staronelottery01@gmail.com">staronelottery01@gmail.com</a></p>
+    <p><b>WhatsApp:</b> <a href="https://wa.me/919351883616">+91 93518 83616</a></p>
+  </div>
+</section>
 
-</div>
+<footer>
+  <b>STARONE</b><br>
+  <span>Official Application & Information Website</span><br>
+  © 2026 P C STUDIO. All rights reserved.
+</footer>
 
 </body>
 </html>
